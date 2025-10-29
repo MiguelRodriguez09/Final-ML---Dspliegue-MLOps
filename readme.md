@@ -1,18 +1,26 @@
-# Proyecto Final - Despliegue MLOps
-Este repositorio contiene el proyecto final para la clase de Machine Learning, enfocado en la implementación de un pipeline de MLOps.
+# 🧠 Proyecto Final - Despliegue MLOps
 
-# Descripción
-El objetivo de este proyecto es demostrar los conceptos y prácticas de MLOps, abarcando desde la ingesta de datos hasta el monitoreo del modelo en producción.
+Este repositorio contiene el proyecto final para la clase de **Machine Learning**, enfocado en la implementación de un **pipeline de MLOps**.
 
-# Estructura de Carpetas
+---
+
+## 📘 Descripción
+
+El objetivo de este proyecto es demostrar los conceptos y prácticas de **MLOps**, abarcando desde la **ingesta de datos** hasta el **monitoreo del modelo en producción**.
+
+---
+
+## 🗂️ Estructura de Carpetas
+
 A continuación se describe la estructura del proyecto:
+
+---
 
 .
 ├── README.md
 └── mlops_pipeline/
     ├── Base_de_datos.csv       # Conjunto de datos inicial.
     ├── config.json             # Archivo de configuración.
-    ├── ramas.txt               # Descripción de ramas (posiblemente para git).
     ├── readme.md               # README específico de la carpeta mlops_pipeline.
     ├── requeriments.txt        # Dependencias de Python.
     ├── set_up.bat              # Script de configuración inicial.
