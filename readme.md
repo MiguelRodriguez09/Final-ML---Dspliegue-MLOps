@@ -16,7 +16,7 @@ A continuación se describe la estructura del proyecto:
 
 ```text
 .
-├── README.md
+
 └── mlops_pipeline/
     ├── Base_de_datos.csv          # Conjunto de datos inicial.
     ├── config.json                # Archivo de configuración.
