@@ -20,7 +20,7 @@ echo Buscando código del proyecto en config.json...
 setlocal EnableDelayedExpansion
 
 REM Cambiar al directorio donde está config.json
-cd etl_scripts\src
+
 
 REM Leer línea que contiene "project_name"
 for /f "usebackq tokens=2 delims=:" %%A in (`findstr "project_code" config.json`) do (
@@ -31,7 +31,7 @@ for /f "usebackq tokens=2 delims=:" %%A in (`findstr "project_code" config.json`
 )
 
 REM Volver al directorio raíz
-cd ..\..
+
 
 echo Creando nuevo ambiente virtual: %project_code%-venv
 py -m venv %project_code%-venv
