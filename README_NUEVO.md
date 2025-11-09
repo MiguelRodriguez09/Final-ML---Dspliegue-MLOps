@@ -1,7 +1,11 @@
 # 🧠 Proyecto Final MLOps - Customer Churn Prediction
 
-[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.13-blue.svg)](https://www.python.org/)
 [![MLOps](https://img.shields.io/badge/MLOps-Pipeline-green.svg)](https://ml-ops.org/)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MiguelRodriguez09_Final-ML---Dspliegue-MLOps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MiguelRodriguez09_Final-ML---Dspliegue-MLOps)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=MiguelRodriguez09_Final-ML---Dspliegue-MLOps&metric=coverage)](https://sonarcloud.io/summary/new_code?id=MiguelRodriguez09_Final-ML---Dspliegue-MLOps)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=MiguelRodriguez09_Final-ML---Dspliegue-MLOps&metric=bugs)](https://sonarcloud.io/summary/new_code?id=MiguelRodriguez09_Final-ML---Dspliegue-MLOps)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=MiguelRodriguez09_Final-ML---Dspliegue-MLOps&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=MiguelRodriguez09_Final-ML---Dspliegue-MLOps)
 
 Este repositorio contiene un **pipeline completo de MLOps** para predicción de abandono de clientes (Customer Churn), implementando las mejores prácticas de Machine Learning Operations.
 
