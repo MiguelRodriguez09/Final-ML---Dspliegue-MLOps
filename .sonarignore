@@ -1,0 +1,53 @@
+# Ignorar entorno virtual
+Proyecto-venv/
+venv/
+env/
+.venv/
+
+# Ignorar cache de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Ignorar notebooks checkpoints
+.ipynb_checkpoints/
+
+# Ignorar datos y modelos entrenados
+mlops_pipeline/data/
+mlops_pipeline/models/
+mlops_pipeline/reports/
+mlops_pipeline/monitoring/
+
+# Ignorar archivos de configuración locales
+*.pkl
+*.joblib
+*.h5
+*.pth
+*.onnx
+
+# Ignorar archivos de log
+*.log
+
+# Ignorar archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignorar archivos de build
+dist/
+build/
+*.egg-info/
+
+# Ignorar archivos de test
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml

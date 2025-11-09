@@ -1,0 +1,67 @@
+# .dockerignore - Archivos a excluir del contexto de Docker
+
+# Entornos virtuales
+Proyecto-venv/
+venv/
+env/
+ENV/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyc
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Logs y temporales
+*.log
+logs/
+*.tmp
+*.temp
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Documentación
+README.md
+*.md
+Directrices/
+
+# Configuración local
+.env
+.env.local
+config.local.json
+
+# Datos de desarrollo (mantener solo necesarios)
+*.csv.bak
+*.pkl.bak
+
+# GitHub
+.github/
+
+# Reportes
+mlops_pipeline/reports/*.png
+mlops_pipeline/reports/*.html

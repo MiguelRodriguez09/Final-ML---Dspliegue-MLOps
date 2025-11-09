@@ -1,0 +1,216 @@
+{
+  "timestamp": "2025-11-08T19:28:44.901386",
+  "variables_analizadas": 11,
+  "drift_detectado_total": 0,
+  "resultados_por_variable": [
+    {
+      "variable": "CreditScore",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.015857142857142858,
+        "ks_pvalue": 0.3423086497578096,
+        "psi": 0.0035032259833994855,
+        "jensen_shannon": 0.010385581419114696
+      },
+      "estadisticas": {
+        "ref_mean": -5.379823570755045e-16,
+        "curr_mean": 0.004187598489345165,
+        "ref_std": 1.0000714362254008,
+        "curr_std": 1.0116283890883002,
+        "cambio_media": -778389557625954.6
+      },
+      "severidad": "baja"
+    },
+    {
+      "variable": "Age",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.028857142857142856,
+        "ks_pvalue": 0.0058788831713568815,
+        "psi": 0.005022903227361947,
+        "jensen_shannon": 0.026237864753793153
+      },
+      "estadisticas": {
+        "ref_mean": -1.2434497875801754e-16,
+        "curr_mean": 0.0003138029024850805,
+        "ref_std": 1.000071436225401,
+        "curr_std": 1.0109628590535176,
+        "cambio_media": -252364756196455.06
+      },
+      "severidad": "baja"
+    },
+    {
+      "variable": "Tenure",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.055142857142857146,
+        "ks_pvalue": 1.129745686170346e-09,
+        "psi": 0.07053106359580993,
+        "jensen_shannon": 0.09712353673712187
+      },
+      "estadisticas": {
+        "ref_mean": -5.938107148852265e-17,
+        "curr_mean": 0.000882551724062314,
+        "ref_std": 1.0000714362254008,
+        "curr_std": 1.0062136977872662,
+        "cambio_media": -1486250924645163.2
+      },
+      "severidad": "baja"
+    },
+    {
+      "variable": "Balance",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.0,
+        "ks_pvalue": 1.0,
+        "psi": 0.0,
+        "jensen_shannon": 0.0
+      },
+      "estadisticas": {
+        "ref_mean": -1.3398805874333318e-16,
+        "curr_mean": -1.3297299769224732e-16,
+        "ref_std": 1.000071436225401,
+        "curr_std": 1.000071436225401,
+        "cambio_media": -0.7575757575757556
+      },
+      "severidad": "baja"
+    },
+    {
+      "variable": "NumOfProducts",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.0,
+        "ks_pvalue": 1.0,
+        "psi": 0.0,
+        "jensen_shannon": 0.0
+      },
+      "estadisticas": {
+        "ref_mean": -2.0808751547260076e-17,
+        "curr_mean": -2.4361465226060577e-17,
+        "ref_std": 1.000071436225401,
+        "curr_std": 1.000071436225401,
+        "cambio_media": -17.073170731707318
+      },
+      "severidad": "baja"
+    },
+    {
+      "variable": "HasCrCard",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.0,
+        "ks_pvalue": 1.0,
+        "psi": 0.0,
+        "jensen_shannon": 0.0
+      },
+      "estadisticas": {
+        "ref_mean": -3.0451831532575724e-17,
+        "curr_mean": -3.1213127320890115e-17,
+        "ref_std": 1.0000714362254008,
+        "curr_std": 1.0000714362254008,
+        "cambio_media": -2.4999999999999933
+      },
+      "severidad": "baja"
+    },
+    {
+      "variable": "IsActiveMember",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.0,
+        "ks_pvalue": 1.0,
+        "psi": 0.0,
+        "jensen_shannon": 0.0
+      },
+      "estadisticas": {
+        "ref_mean": 3.857231994126258e-17,
+        "curr_mean": 4.0602442043434296e-17,
+        "ref_std": 1.0000714362254008,
+        "curr_std": 1.0000714362254008,
+        "cambio_media": 5.263157894736844
+      },
+      "severidad": "baja"
+    },
+    {
+      "variable": "EstimatedSalary",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.0,
+        "ks_pvalue": 1.0,
+        "psi": 0.0,
+        "jensen_shannon": 0.0
+      },
+      "estadisticas": {
+        "ref_mean": 2.547803238225502e-16,
+        "curr_mean": 2.5376526277146434e-16,
+        "ref_std": 1.000071436225401,
+        "curr_std": 1.000071436225401,
+        "cambio_media": 0.39840637450200067
+      },
+      "severidad": "baja"
+    },
+    {
+      "variable": "Geography_Germany",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.0,
+        "ks_pvalue": 1.0,
+        "psi": 0.0,
+        "jensen_shannon": 0.0
+      },
+      "estadisticas": {
+        "ref_mean": 0.2507142857142857,
+        "curr_mean": 0.2507142857142857,
+        "ref_std": 0.43345527237446935,
+        "curr_std": 0.43345527237446935,
+        "cambio_media": 0.0
+      },
+      "severidad": "baja"
+    },
+    {
+      "variable": "Geography_Spain",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.0,
+        "ks_pvalue": 1.0,
+        "psi": 0.0,
+        "jensen_shannon": 0.0
+      },
+      "estadisticas": {
+        "ref_mean": 0.24928571428571428,
+        "curr_mean": 0.24928571428571428,
+        "ref_std": 0.4326304258596984,
+        "curr_std": 0.4326304258596984,
+        "cambio_media": 0.0
+      },
+      "severidad": "baja"
+    },
+    {
+      "variable": "Gender_Male",
+      "tipo": "numerica",
+      "drift_detectado": false,
+      "metricas": {
+        "ks_statistic": 0.0,
+        "ks_pvalue": 1.0,
+        "psi": 0.0,
+        "jensen_shannon": 0.0
+      },
+      "estadisticas": {
+        "ref_mean": 0.55,
+        "curr_mean": 0.55,
+        "ref_std": 0.4975292576267242,
+        "curr_std": 0.4975292576267242,
+        "cambio_media": 0.0
+      },
+      "severidad": "baja"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "escalado": [
+    {
+      "columna": "RowNumber",
+      "razon": "Gran rango de valores",
+      "metodo_sugerido": "StandardScaler o MinMaxScaler"
+    },
+    {
+      "columna": "CustomerId",
+      "razon": "Gran rango de valores",
+      "metodo_sugerido": "StandardScaler o MinMaxScaler"
+    },
+    {
+      "columna": "Balance",
+      "razon": "Gran rango de valores",
+      "metodo_sugerido": "StandardScaler o MinMaxScaler"
+    },
+    {
+      "columna": "EstimatedSalary",
+      "razon": "Gran rango de valores",
+      "metodo_sugerido": "StandardScaler o MinMaxScaler"
+    }
+  ],
+  "encoding": [
+    {
+      "columna": "Surname",
+      "categorias": 2932,
+      "metodo_sugerido": "TargetEncoder o FrequencyEncoder"
+    },
+    {
+      "columna": "Geography",
+      "categorias": 3,
+      "metodo_sugerido": "OneHotEncoder"
+    },
+    {
+      "columna": "Gender",
+      "categorias": 2,
+      "metodo_sugerido": "LabelEncoder o Binary Encoding"
+    }
+  ],
+  "imputacion": [],
+  "atributos_derivados": [
+    {
+      "nombre": "AgeGroup",
+      "descripcion": "Categor\u00edas de edad",
+      "fuente": "Age"
+    }
+  ]
+}

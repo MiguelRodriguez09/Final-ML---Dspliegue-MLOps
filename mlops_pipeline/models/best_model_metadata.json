@@ -1,0 +1,24 @@
+{
+  "nombre": "LightGBM",
+  "metricas": {
+    "nombre": "LightGBM",
+    "tiempo_entrenamiento": 1.475409746170044,
+    "train_accuracy": 0.8911428571428571,
+    "train_precision": 0.888458337909382,
+    "train_recall": 0.8911428571428571,
+    "train_f1": 0.8819085487216864,
+    "train_auc_roc": 0.9292925328023165,
+    "val_accuracy": 0.872,
+    "val_precision": 0.8650222036028488,
+    "val_recall": 0.872,
+    "val_f1": 0.8610549450549452,
+    "val_auc_roc": 0.878442457384964,
+    "test_accuracy": 0.868,
+    "test_precision": 0.8601844588495938,
+    "test_recall": 0.868,
+    "test_f1": 0.8562631473705259,
+    "test_auc_roc": 0.8657779505237133,
+    "consistency": 0.02314285714285713
+  },
+  "fecha_entrenamiento": "2025-11-08T19:15:13.902445"
+}
