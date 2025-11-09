@@ -23,7 +23,6 @@ PROYECTO_ML/
 |        ├── Cargar_datos.ipynb          # Notebook para la carga de datos.
 |        ├── Comprension_eda.ipynb       # Notebook para Análisis Exploratorio de Datos(EDA).
 |        ├── ft_engineering.py           # Script para ingeniería de características.
-|        ├── heuristic_model.py          # Script para un modelo heurístico base.
 |        ├── model_deploy.ipynb          # Notebook para el despliegue del modelo.
 |        ├── model_evaluation.ipynb      # Notebook para la evaluación del modelo.
 |        ├── model_monitoring.ipynb      # Notebook para el monitoreo del modelo.

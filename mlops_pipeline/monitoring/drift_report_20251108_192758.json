@@ -1,9 +1,0 @@
-{
-  "timestamp": "2025-11-08T19:27:58.025593",
-  "variables_analizadas": 11,
-  "drift_detectado_total": 0,
-  "resultados_por_variable": [
-    {
-      "variable": "CreditScore",
-      "tipo": "numerica",
-      "drift_detectado": 

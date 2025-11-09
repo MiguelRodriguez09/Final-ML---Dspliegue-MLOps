@@ -1,7 +1,0 @@
-{
-  "RowNumber": {
-    "tipo_dato": "int64",
-    "permite_nulos": "False",
-    "valores_unicos": 10000,
-    "rango_valido": [
-      
