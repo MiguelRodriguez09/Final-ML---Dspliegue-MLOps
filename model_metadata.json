@@ -1,0 +1,76 @@
+{
+  "model_name": "Gradient Boosting",
+  "model_type": "GradientBoostingClassifier",
+  "metrics": {
+    "train_accuracy": 0.89975,
+    "test_accuracy": 0.8705,
+    "train_precision": 0.8826247689463955,
+    "test_precision": 0.7913385826771654,
+    "train_recall": 0.5858895705521472,
+    "test_recall": 0.49385749385749383,
+    "train_f1": 0.7042772861356932,
+    "test_f1": 0.6081694402420574,
+    "train_roc_auc": 0.9413273010950486,
+    "test_roc_auc": 0.8657949166423743,
+    "cv_mean": 0.86175,
+    "cv_std": 0.005986965007414029
+  },
+  "all_results": {
+    "Logistic Regression": {
+      "train_accuracy": 0.810625,
+      "test_accuracy": 0.808,
+      "train_precision": 0.5986277873070326,
+      "test_precision": 0.5891472868217055,
+      "train_recall": 0.21411042944785277,
+      "test_recall": 0.18673218673218672,
+      "train_f1": 0.315408947130592,
+      "test_f1": 0.2835820895522388,
+      "train_roc_auc": 0.7653870231433773,
+      "test_roc_auc": 0.77475626628169,
+      "cv_mean": 0.8102499999999999,
+      "cv_std": 0.006585969936159752
+    },
+    "Decision Tree": {
+      "train_accuracy": 0.8915,
+      "test_accuracy": 0.843,
+      "train_precision": 0.8122950819672131,
+      "test_precision": 0.6495176848874598,
+      "train_recall": 0.6079754601226994,
+      "test_recall": 0.4963144963144963,
+      "train_f1": 0.6954385964912281,
+      "test_f1": 0.5626740947075209,
+      "train_roc_auc": 0.9172141268022075,
+      "test_roc_auc": 0.816347163804791,
+      "cv_mean": 0.8372499999999998,
+      "cv_std": 0.005399652766613792
+    },
+    "Random Forest": {
+      "train_accuracy": 0.88525,
+      "test_accuracy": 0.8675,
+      "train_precision": 0.8877995642701525,
+      "test_precision": 0.8198198198198198,
+      "train_recall": 0.5,
+      "test_recall": 0.44717444717444715,
+      "train_f1": 0.6397174254317112,
+      "test_f1": 0.5786963434022258,
+      "train_roc_auc": 0.933010757866148,
+      "test_roc_auc": 0.8641384065112879,
+      "cv_mean": 0.862125,
+      "cv_std": 0.0054572199882357815
+    },
+    "Gradient Boosting": {
+      "train_accuracy": 0.89975,
+      "test_accuracy": 0.8705,
+      "train_precision": 0.8826247689463955,
+      "test_precision": 0.7913385826771654,
+      "train_recall": 0.5858895705521472,
+      "test_recall": 0.49385749385749383,
+      "train_f1": 0.7042772861356932,
+      "test_f1": 0.6081694402420574,
+      "train_roc_auc": 0.9413273010950486,
+      "test_roc_auc": 0.8657949166423743,
+      "cv_mean": 0.86175,
+      "cv_std": 0.005986965007414029
+    }
+  }
+}

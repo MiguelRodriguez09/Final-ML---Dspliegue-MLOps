@@ -1,0 +1,110 @@
+{
+  "variable_classification": {
+    "numerical_continuous": [
+      "Balance",
+      "EstimatedSalary"
+    ],
+    "numerical_discrete": [
+      "CreditScore",
+      "Age",
+      "Tenure",
+      "NumOfProducts"
+    ],
+    "categorical_nominal": [
+      "Geography"
+    ],
+    "categorical_binary": [
+      "Gender",
+      "HasCrCard",
+      "IsActiveMember"
+    ],
+    "identifier": [],
+    "target": [
+      "Exited"
+    ]
+  },
+  "validation_rules": {
+    "Balance": {
+      "tipo": "numérico",
+      "min_valido": 0.0,
+      "max_valido": 185967.98540000003,
+      "permite_nulos": "False",
+      "debe_ser_positivo": "True"
+    },
+    "EstimatedSalary": {
+      "tipo": "numérico",
+      "min_valido": 1842.8253000000004,
+      "max_valido": 198069.7345,
+      "permite_nulos": "False",
+      "debe_ser_positivo": "True"
+    },
+    "CreditScore": {
+      "tipo": "numérico",
+      "min_valido": 432.0,
+      "max_valido": 850.0,
+      "permite_nulos": "False",
+      "debe_ser_positivo": "True"
+    },
+    "Age": {
+      "tipo": "numérico",
+      "min_valido": 21.0,
+      "max_valido": 72.0,
+      "permite_nulos": "False",
+      "debe_ser_positivo": "True"
+    },
+    "Tenure": {
+      "tipo": "numérico",
+      "min_valido": 0.0,
+      "max_valido": 10.0,
+      "permite_nulos": "False",
+      "debe_ser_positivo": "True"
+    },
+    "NumOfProducts": {
+      "tipo": "numérico",
+      "min_valido": 1.0,
+      "max_valido": 3.0,
+      "permite_nulos": "False",
+      "debe_ser_positivo": "True"
+    },
+    "Geography": {
+      "tipo": "categórico",
+      "valores_validos": "['France', 'Spain', 'Germany']",
+      "permite_nulos": "False"
+    },
+    "Gender": {
+      "tipo": "categórico",
+      "valores_validos": "['Female', 'Male']",
+      "permite_nulos": "False"
+    },
+    "HasCrCard": {
+      "tipo": "categórico",
+      "valores_validos": "[1, 0]",
+      "permite_nulos": "False"
+    },
+    "IsActiveMember": {
+      "tipo": "categórico",
+      "valores_validos": "[1, 0]",
+      "permite_nulos": "False"
+    }
+  },
+  "feature_engineering_suggestions": [
+    "Aplicar transformación logarítmica o Box-Cox a 'Age' (skewness=1.01)",
+    "Aplicar One-Hot Encoding a 'Geography' (3 categorías)",
+    "Aplicar Label Encoding a 'Gender' (binaria)",
+    "Aplicar Label Encoding a 'HasCrCard' (binaria)",
+    "Aplicar Label Encoding a 'IsActiveMember' (binaria)",
+    "Aplicar StandardScaler o MinMaxScaler a variables numéricas (6 vars)",
+    "Crear interacciones entre variables relevantes identificadas en el análisis bivariable",
+    "Crear bins o categorías para variables continuas con patrones claros"
+  ],
+  "target_column": "Exited",
+  "dataset_shape": [
+    10000,
+    11
+  ],
+  "columns_removed": [
+    "RowNumber",
+    "CustomerId",
+    "Surname"
+  ]
+}

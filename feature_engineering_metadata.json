@@ -1,0 +1,25 @@
+{
+  "target_column": "Exited",
+  "n_features": 11,
+  "feature_names": [
+    "CreditScore",
+    "Age",
+    "Tenure",
+    "Balance",
+    "EstimatedSalary",
+    "NumOfProducts",
+    "HasCrCard",
+    "IsActiveMember",
+    "Geography_Germany",
+    "Geography_Spain",
+    "Gender_Male"
+  ],
+  "train_shape": [
+    8000,
+    11
+  ],
+  "test_shape": [
+    2000,
+    11
+  ]
+}
