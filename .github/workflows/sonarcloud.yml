@@ -12,31 +12,30 @@ jobs:
   sonarcloud:
     name: SonarCloud Scan
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Recomendado para una mejor relevancia en SonarCloud
-
+          fetch-depth: 0  # Shallow clones should be disabled for better relevancy
+      
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-
+      
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      # 🔄 NUEVA acción recomendada por SonarSource
+      
       - name: SonarCloud Scan
         uses: sonarsource/sonarqube-scan-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Necesario para obtener info de PR
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    # Token de SonarCloud (agregar en secrets)
         with:
           args: >
             -Dsonar.projectKey=MiguelRodriguez09_Final-ML---Dspliegue-MLOps
             -Dsonar.organization=miguelrodriguez09
             -Dsonar.python.version=3.13
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
