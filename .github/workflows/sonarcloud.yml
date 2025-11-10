@@ -1,3 +1,4 @@
+
 name: SonarCloud Analysis
 
 on:
@@ -30,12 +31,13 @@ jobs:
           pip install -r requirements.txt
       
       - name: SonarCloud Scan
-        uses: sonarsource/sonarqube-scan-action@v2
+        run: |
+          sonar-scanner \
+          Dsonar.organization=<your-org> \
+          Dsonar.projectKey=<your-project-key> \
+          Dsonar.sources=. \
+          Dsonar.host.url=https://sonarcloud.io \
+          uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Necesario para obtener info de PR
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    # Token de SonarCloud (agregar en secrets)
-        with:
-          args: >
-            -Dsonar.projectKey=MiguelRodriguez09_Final-ML---Dspliegue-MLOps
-            -Dsonar.organization=miguelrodriguez09
-            -Dsonar.python.version=3.13
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
