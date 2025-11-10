@@ -1,0 +1,39 @@
+# ============================================
+# Dockerfile para Frontend MLOps
+# ============================================
+# Imagen ligera para servir el frontend web
+# ============================================
+
+FROM python:3.10-slim
+
+# Metadata
+LABEL maintainer="MLOps Team"
+LABEL description="Frontend web para MLOps Churn Prediction"
+LABEL version="1.0"
+
+# Configurar directorio de trabajo
+WORKDIR /app
+
+# Copiar archivos del frontend
+COPY frontend/ /app/
+
+# Instalar dependencias mínimas (solo Python estándar)
+# No se requieren dependencias adicionales para el servidor HTTP
+
+# Exponer puerto
+EXPOSE 8080
+
+# Crear usuario no-root
+RUN groupadd -r frontend && \
+    useradd -r -g frontend frontend && \
+    chown -R frontend:frontend /app
+
+# Cambiar a usuario no-root
+USER frontend
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8080').read()"
+
+# Comando para iniciar el servidor
+CMD ["python", "server.py"]

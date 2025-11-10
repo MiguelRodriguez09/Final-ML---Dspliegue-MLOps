@@ -1,0 +1,119 @@
+# ============================================
+# MLOps Pipeline - Docker Compose
+# ============================================
+# Orquestación de servicios:
+# - API Flask (predicciones)
+# - Streamlit Dashboard (monitoreo)
+# ============================================
+
+version: '3.8'
+
+services:
+  # Servicio de API Flask para predicciones
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mlops-api
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - FLASK_APP=mlops_pipeline/src/model_deploy.py
+      - PYTHONUNBUFFERED=1
+      - PORT=5000
+    volumes:
+      # Montar artefactos del modelo (opcional, para hot-reload)
+      - ./best_model.pkl:/app/best_model.pkl:ro
+      - ./preprocessor.pkl:/app/preprocessor.pkl:ro
+      - ./model_metadata.json:/app/model_metadata.json:ro
+      - ./feature_engineering_metadata.json:/app/feature_engineering_metadata.json:ro
+    restart: unless-stopped
+    networks:
+      - mlops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # Servicio Streamlit para monitoreo y visualización
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: mlops-dashboard
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    volumes:
+      # Montar datos y reportes
+      - ./train_data.csv:/app/train_data.csv:ro
+      - ./test_data.csv:/app/test_data.csv:ro
+      - ./drift_report.json:/app/drift_report.json:ro
+      - ./model_metadata.json:/app/model_metadata.json:ro
+    restart: unless-stopped
+    networks:
+      - mlops-network
+    depends_on:
+      - api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # Servicio Frontend para interfaz de usuario
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: mlops-frontend
+    ports:
+      - "8080:8080"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_BASE_URL=http://api:5000
+    restart: unless-stopped
+    networks:
+      - mlops-network
+    depends_on:
+      - api
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+networks:
+  mlops-network:
+    driver: bridge
+    name: mlops-network
+
+volumes:
+  model-artifacts:
+    name: mlops-model-artifacts

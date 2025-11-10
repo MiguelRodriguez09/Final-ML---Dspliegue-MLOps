@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLOps - Predicción de Churn</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <h1>MLOps Churn Prediction</h1>
+            </div>
+            <nav class="nav">
+                <a href="#prediccion" class="nav-link active">
+                    <i class="fas fa-chart-line"></i> Predicción
+                </a>
+                <a href="#modelo" class="nav-link">
+                    <i class="fas fa-cogs"></i> Modelo
+                </a>
+                <a href="#api" class="nav-link">
+                    <i class="fas fa-code"></i> API
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-info-circle"></i> Estado del Sistema</h3>
+                <div class="status-card" id="systemStatus">
+                    <div class="status-loading">
+                        <i class="fas fa-spinner fa-spin"></i> Verificando...
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><i class="fas fa-chart-bar"></i> Métricas del Modelo</h3>
+                <div class="metrics-card" id="modelMetrics">
+                    <div class="status-loading">
+                        <i class="fas fa-spinner fa-spin"></i> Cargando...
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><i class="fas fa-history"></i> Historial</h3>
+                <div class="history-list" id="predictionHistory">
+                    <p class="empty-state">No hay predicciones aún</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Prediction Section -->
+            <section id="prediccion" class="section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-calculator"></i> Predicción de Churn</h2>
+                    <p class="section-description">
+                        Ingresa los datos del cliente para predecir la probabilidad de abandono (churn)
+                    </p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="individual">
+                        <i class="fas fa-user"></i> Predicción Individual
+                    </button>
+                    <button class="tab-btn" data-tab="batch">
+                        <i class="fas fa-users"></i> Predicción por Lote
+                    </button>
+                    <button class="tab-btn" data-tab="test">
+                        <i class="fas fa-vial"></i> Datos de Prueba
+                    </button>
+                </div>
+
+                <!-- Tab Content: Individual Prediction -->
+                <div class="tab-content active" id="individual">
+                    <form id="predictionForm" class="prediction-form">
+                        <div class="form-grid">
+                            <!-- Column 1 -->
+                            <div class="form-column">
+                                <h4><i class="fas fa-user-tag"></i> Información Personal</h4>
+                                
+                                <div class="form-group">
+                                    <label for="creditScore">
+                                        <i class="fas fa-credit-card"></i> Credit Score
+                                        <span class="tooltip" data-tooltip="Puntuación crediticia (300-850)">
+                                            <i class="fas fa-question-circle"></i>
+                                        </span>
+                                    </label>
+                                    <input type="number" id="creditScore" name="CreditScore" 
+                                           min="300" max="850" value="619" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="geography">
+                                        <i class="fas fa-map-marker-alt"></i> País
+                                    </label>
+                                    <select id="geography" name="Geography" required>
+                                        <option value="France">Francia</option>
+                                        <option value="Spain">España</option>
+                                        <option value="Germany">Alemania</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gender">
+                                        <i class="fas fa-venus-mars"></i> Género
+                                    </label>
+                                    <select id="gender" name="Gender" required>
+                                        <option value="Female">Femenino</option>
+                                        <option value="Male">Masculino</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="age">
+                                        <i class="fas fa-birthday-cake"></i> Edad
+                                    </label>
+                                    <input type="number" id="age" name="Age" 
+                                           min="18" max="100" value="42" required>
+                                </div>
+                            </div>
+
+                            <!-- Column 2 -->
+                            <div class="form-column">
+                                <h4><i class="fas fa-briefcase"></i> Información Bancaria</h4>
+
+                                <div class="form-group">
+                                    <label for="tenure">
+                                        <i class="fas fa-calendar-alt"></i> Años como Cliente
+                                        <span class="tooltip" data-tooltip="Años de antigüedad (0-10)">
+                                            <i class="fas fa-question-circle"></i>
+                                        </span>
+                                    </label>
+                                    <input type="number" id="tenure" name="Tenure" 
+                                           min="0" max="10" value="2" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="balance">
+                                        <i class="fas fa-wallet"></i> Balance ($)
+                                    </label>
+                                    <input type="number" id="balance" name="Balance" 
+                                           min="0" step="0.01" value="0" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="numProducts">
+                                        <i class="fas fa-box-open"></i> Número de Productos
+                                    </label>
+                                    <input type="number" id="numProducts" name="NumOfProducts" 
+                                           min="1" max="4" value="1" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="estimatedSalary">
+                                        <i class="fas fa-dollar-sign"></i> Salario Estimado ($)
+                                    </label>
+                                    <input type="number" id="estimatedSalary" name="EstimatedSalary" 
+                                           min="0" step="0.01" value="101348.88" required>
+                                </div>
+                            </div>
+
+                            <!-- Column 3 -->
+                            <div class="form-column">
+                                <h4><i class="fas fa-toggle-on"></i> Estado del Cliente</h4>
+
+                                <div class="form-group checkbox-group">
+                                    <label>
+                                        <input type="checkbox" id="hasCrCard" name="HasCrCard" checked>
+                                        <span class="checkbox-label">
+                                            <i class="fas fa-credit-card"></i> Tiene Tarjeta de Crédito
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div class="form-group checkbox-group">
+                                    <label>
+                                        <input type="checkbox" id="isActiveMember" name="IsActiveMember" checked>
+                                        <span class="checkbox-label">
+                                            <i class="fas fa-user-check"></i> Miembro Activo
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div class="info-box">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <div>
+                                        <strong>Consejo:</strong>
+                                        <p>Ajusta los valores para ver cómo diferentes características afectan la probabilidad de churn.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                                <i class="fas fa-redo"></i> Limpiar
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="fillExampleData()">
+                                <i class="fas fa-magic"></i> Datos de Ejemplo
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-chart-line"></i> Predecir
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Results -->
+                    <div id="predictionResult" class="result-container" style="display: none;">
+                        <!-- Results will be inserted here dynamically -->
+                    </div>
+                </div>
+
+                <!-- Tab Content: Batch Prediction -->
+                <div class="tab-content" id="batch">
+                    <div class="batch-container">
+                        <div class="upload-area" id="uploadArea">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Arrastra un archivo CSV aquí</h3>
+                            <p>o haz clic para seleccionar</p>
+                            <input type="file" id="fileInput" accept=".csv" hidden>
+                            <button type="button" class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                                <i class="fas fa-file-upload"></i> Seleccionar Archivo
+                            </button>
+                        </div>
+
+                        <div class="batch-info">
+                            <h4><i class="fas fa-info-circle"></i> Formato del Archivo</h4>
+                            <p>El archivo CSV debe contener las siguientes columnas:</p>
+                            <code>CreditScore, Geography, Gender, Age, Tenure, Balance, NumOfProducts, HasCrCard, IsActiveMember, EstimatedSalary</code>
+                            
+                            <button type="button" class="btn btn-secondary btn-small" onclick="downloadTemplate()">
+                                <i class="fas fa-download"></i> Descargar Plantilla
+                            </button>
+                        </div>
+
+                        <div id="batchResult" class="result-container" style="display: none;">
+                            <!-- Batch results will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Test Data -->
+                <div class="tab-content" id="test">
+                    <div class="test-data-container">
+                        <h3><i class="fas fa-vial"></i> Datos de Prueba Predefinidos</h3>
+                        <p>Selecciona un conjunto de datos de prueba para realizar una predicción rápida:</p>
+
+                        <div class="test-cards">
+                            <div class="test-card" onclick="loadTestData(0)">
+                                <i class="fas fa-user-tie"></i>
+                                <h4>Cliente Premium</h4>
+                                <p>Alto balance, múltiples productos</p>
+                            </div>
+                            <div class="test-card" onclick="loadTestData(1)">
+                                <i class="fas fa-user"></i>
+                                <h4>Cliente Estándar</h4>
+                                <p>Balance medio, cliente activo</p>
+                            </div>
+                            <div class="test-card" onclick="loadTestData(2)">
+                                <i class="fas fa-user-times"></i>
+                                <h4>Cliente en Riesgo</h4>
+                                <p>Bajo balance, inactivo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Model Info Section -->
+            <section id="modelo" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-cogs"></i> Información del Modelo</h2>
+                    <p class="section-description">
+                        Detalles técnicos y métricas de performance del modelo de Machine Learning
+                    </p>
+                </div>
+
+                <div id="modelInfoContent" class="model-info-content">
+                    <div class="status-loading">
+                        <i class="fas fa-spinner fa-spin"></i> Cargando información del modelo...
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Documentation Section -->
+            <section id="api" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-code"></i> Documentación de la API</h2>
+                    <p class="section-description">
+                        Endpoints disponibles y ejemplos de uso
+                    </p>
+                </div>
+
+                <div class="api-docs">
+                    <div class="api-endpoint">
+                        <div class="endpoint-header">
+                            <span class="method get">GET</span>
+                            <code>/</code>
+                            <span class="endpoint-title">Health Check</span>
+                        </div>
+                        <p>Verifica el estado del servicio</p>
+                        <div class="code-block">
+                            <pre><code>curl http://localhost:5000/</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <div class="endpoint-header">
+                            <span class="method get">GET</span>
+                            <code>/model-info</code>
+                            <span class="endpoint-title">Información del Modelo</span>
+                        </div>
+                        <p>Obtiene métricas y detalles del modelo</p>
+                        <div class="code-block">
+                            <pre><code>curl http://localhost:5000/model-info</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <div class="endpoint-header">
+                            <span class="method post">POST</span>
+                            <code>/predict</code>
+                            <span class="endpoint-title">Predicción Individual</span>
+                        </div>
+                        <p>Realiza una predicción para un cliente</p>
+                        <div class="code-block">
+                            <pre><code>curl -X POST http://localhost:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+    "CreditScore": 619,
+    "Geography": "France",
+    "Gender": "Female",
+    "Age": 42,
+    "Tenure": 2,
+    "Balance": 0,
+    "NumOfProducts": 1,
+    "HasCrCard": 1,
+    "IsActiveMember": 1,
+    "EstimatedSalary": 101348.88
+  }'</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 MLOps Churn Prediction System | 
+                <a href="https://github.com/MiguelRodriguez09/Final-ML---Dspliegue-MLOps" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+# ============================================
+# MLOps Pipeline - Docker Compose (Development)
+# ============================================
+# Configuración para desarrollo local
+# Hot-reload habilitado
+# ============================================
+
+version: '3.8'
+
+services:
+  # Servicio de API Flask con hot-reload
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mlops-api-dev
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - FLASK_APP=mlops_pipeline/src/model_deploy.py
+      - PYTHONUNBUFFERED=1
+      - PORT=5000
+    volumes:
+      # Montar código fuente para hot-reload
+      - ./mlops_pipeline:/app/mlops_pipeline
+      - ./best_model.pkl:/app/best_model.pkl
+      - ./preprocessor.pkl:/app/preprocessor.pkl
+      - ./model_metadata.json:/app/model_metadata.json
+      - ./feature_engineering_metadata.json:/app/feature_engineering_metadata.json
+    command: python mlops_pipeline/src/model_deploy.py
+    restart: unless-stopped
+    networks:
+      - mlops-network-dev
+
+  # Servicio Streamlit con hot-reload
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: mlops-dashboard-dev
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_RUN_ON_SAVE=true
+    volumes:
+      # Montar código fuente para hot-reload
+      - ./mlops_pipeline:/app/mlops_pipeline
+      - ./train_data.csv:/app/train_data.csv
+      - ./test_data.csv:/app/test_data.csv
+      - ./drift_report.json:/app/drift_report.json
+      - ./model_metadata.json:/app/model_metadata.json
+    restart: unless-stopped
+    networks:
+      - mlops-network-dev
+    depends_on:
+      - api
+
+networks:
+  mlops-network-dev:
+    driver: bridge
+    name: mlops-network-dev

@@ -1,49 +1,124 @@
-# Archivos de Python
+# ============================================
+# MLOps Pipeline - Docker Ignore
+# ============================================
+# Archivos y directorios a excluir del build
+# ============================================
+
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+*.egg-info/
+dist/
+build/
 
-# Entornos virtuales
+# Virtual Environments
 venv/
 env/
 ENV/
+Proyecto-venv/
 .venv
+*.venv
 
-# Jupyter Notebook
+# Jupyter Notebooks (no necesarios en container)
 .ipynb_checkpoints
 *.ipynb_checkpoints
-
-# Datos y modelos (excepto los necesarios)
-*.csv
-*.pkl
-*.joblib
-!requirements.txt
-
-# Logs
-*.log
+**/*.ipynb
 
 # IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
-# Sistema operativo
+# Git
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# Documentation (excepto necesarios)
+*.md
+!DOCKER_README.md
+Directrices/
+QUICKSTART.md
+SUMMARY.md
+README2.md
+EVALUACION_CHECKLIST.md
+DOCKER_GUIDE.md
+
+# Tests
+tests/
+test_*.py
+*_test.py
+pytest.ini
+.pytest_cache/
+
+# Build artifacts
+*.log
+*.pid
+*.seed
+*.coverage
+.coverage
+htmlcov/
+
+# OS
 .DS_Store
 Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
 
-# Archivos temporales
+# Temporary files
 *.tmp
+*.temp
+*.bak
+*.swp
 temp/
 tmp/
 
-# Reportes y visualizaciones generadas
+# Scripts de desarrollo (no necesarios en container)
+set_up.bat
+run_pipeline.bat
+docker-start.sh
+docker-start.bat
+
+# Archivos Docker (no necesarios dentro del container)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+Makefile
+
+# Reportes y gráficos (se regeneran o se montan como volumen)
 *.png
 *.jpg
 *.pdf
-drift_report.json
-model_metadata.json
-eda_metadata.json
-feature_engineering_metadata.json
+confusion_matrices.png
+model_comparison.png
+roc_curves.png
+drift_summary.png
+
+# SonarQube
+sonar-project.properties
+.scannerwork/
+
+# Node modules (si existen)
+node_modules/
+npm-debug.log*
+
+# Backup files
+backups/
+*.backup
+
+# Large datasets (montar como volúmenes si son necesarios)
+# Descomentar si no quieres incluir en la imagen:
+# Churn_Modelling.csv
+# train_data.csv
+# test_data.csv
+
+# Config files locales
+.env.local
+.env.*.local
+config.local.json
