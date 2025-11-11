@@ -8,7 +8,7 @@
 
 # Variables
 PROJECT_NAME=mlops-pipeline
-DOCKER_COMPOSE=docker-compose
+DOCKER_COMPOSE=docker-compose -f docker/docker-compose.yml
 DOCKER=docker
 
 help: ## Mostrar ayuda
@@ -22,11 +22,11 @@ build: ## Construir las imágenes Docker
 
 build-api: ## Construir solo la imagen de la API
 	@echo "🔨 Construyendo imagen de API..."
-	$(DOCKER) build -t $(PROJECT_NAME)-api:latest -f Dockerfile .
+	$(DOCKER) build -t $(PROJECT_NAME)-api:latest -f docker/Dockerfile .
 
 build-dashboard: ## Construir solo la imagen del dashboard
 	@echo "🔨 Construyendo imagen de Dashboard..."
-	$(DOCKER) build -t $(PROJECT_NAME)-dashboard:latest -f Dockerfile.streamlit .
+	$(DOCKER) build -t $(PROJECT_NAME)-dashboard:latest -f docker/Dockerfile.streamlit .
 
 up: ## Iniciar los servicios
 	@echo "🚀 Iniciando servicios..."

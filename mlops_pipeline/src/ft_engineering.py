@@ -71,7 +71,7 @@ class FeatureEngineer:
         Returns:
             Diccionario con metadatos
         """
-        metadata_path = self.project_root / 'eda_metadata.json'
+        metadata_path = self.project_root / 'data' / 'metadata' / 'eda_metadata.json'
         try:
             with open(metadata_path, 'r', encoding='utf-8') as f:
                 metadata = json.load(f)
@@ -88,11 +88,11 @@ class FeatureEngineer:
         Returns:
             DataFrame limpio
         """
-        data_path = self.project_root / 'data_cleaned.csv'
+        data_path = self.project_root / 'data' / 'processed' / 'data_cleaned.csv'
         
         if not data_path.exists():
             logger.warning(f"{data_path} no existe, cargando dataset original")
-            data_path = self.project_root / 'Churn_Modelling.csv'
+            data_path = self.project_root / 'data' / 'raw' / 'Churn_Modelling.csv'
         
         df = pd.read_csv(data_path)
         logger.info(f"Dataset cargado: {df.shape[0]} filas, {df.shape[1]} columnas")
@@ -286,20 +286,20 @@ class FeatureEngineer:
             feature_names: Nombres de las features
         """
         # Guardar preprocessor
-        preprocessor_path = self.project_root / 'preprocessor.pkl'
+        preprocessor_path = self.project_root / 'models' / 'preprocessor.pkl'
         joblib.dump(self.preprocessor, preprocessor_path)
         logger.info(f"Preprocessor guardado en: {preprocessor_path}")
         
         # Guardar datasets procesados
         train_data = pd.DataFrame(X_train, columns=feature_names)
         train_data[self.target_column] = y_train.values
-        train_path = self.project_root / 'train_data.csv'
+        train_path = self.project_root / 'data' / 'processed' / 'train_data.csv'
         train_data.to_csv(train_path, index=False)
         logger.info(f"Datos de entrenamiento guardados en: {train_path}")
         
         test_data = pd.DataFrame(X_test, columns=feature_names)
         test_data[self.target_column] = y_test.values
-        test_path = self.project_root / 'test_data.csv'
+        test_path = self.project_root / 'data' / 'processed' / 'test_data.csv'
         test_data.to_csv(test_path, index=False)
         logger.info(f"Datos de prueba guardados en: {test_path}")
         
@@ -312,7 +312,7 @@ class FeatureEngineer:
             'test_shape': list(X_test.shape)
         }
         
-        metadata_path = self.project_root / 'feature_engineering_metadata.json'
+        metadata_path = self.project_root / 'data' / 'metadata' / 'feature_engineering_metadata.json'
         with open(metadata_path, 'w', encoding='utf-8') as f:
             json.dump(fe_metadata, f, indent=2)
         logger.info(f"Metadatos guardados en: {metadata_path}")

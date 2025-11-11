@@ -6,14 +6,14 @@
 # - Streamlit Dashboard (monitoreo)
 # ============================================
 
-version: '3.8'
+
 
 services:
   # Servicio de API Flask para predicciones
   api:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: docker/Dockerfile
     container_name: mlops-api
     ports:
       - "5000:5000"
@@ -24,10 +24,10 @@ services:
       - PORT=5000
     volumes:
       # Montar artefactos del modelo (opcional, para hot-reload)
-      - ./best_model.pkl:/app/best_model.pkl:ro
-      - ./preprocessor.pkl:/app/preprocessor.pkl:ro
-      - ./model_metadata.json:/app/model_metadata.json:ro
-      - ./feature_engineering_metadata.json:/app/feature_engineering_metadata.json:ro
+      - ../models/best_model.pkl:/app/models/best_model.pkl:ro
+      - ../models/preprocessor.pkl:/app/models/preprocessor.pkl:ro
+      - ../models/model_metadata.json:/app/models/model_metadata.json:ro
+      - ../data/metadata/feature_engineering_metadata.json:/app/data/metadata/feature_engineering_metadata.json:ro
     restart: unless-stopped
     networks:
       - mlops-network
@@ -49,8 +49,8 @@ services:
   # Servicio Streamlit para monitoreo y visualización
   dashboard:
     build:
-      context: .
-      dockerfile: Dockerfile.streamlit
+      context: ..
+      dockerfile: docker/Dockerfile.streamlit
     container_name: mlops-dashboard
     ports:
       - "8501:8501"
@@ -60,10 +60,10 @@ services:
       - STREAMLIT_SERVER_ADDRESS=0.0.0.0
     volumes:
       # Montar datos y reportes
-      - ./train_data.csv:/app/train_data.csv:ro
-      - ./test_data.csv:/app/test_data.csv:ro
-      - ./drift_report.json:/app/drift_report.json:ro
-      - ./model_metadata.json:/app/model_metadata.json:ro
+      - ../data/processed/train_data.csv:/app/data/processed/train_data.csv:ro
+      - ../data/processed/test_data.csv:/app/data/processed/test_data.csv:ro
+      - ../data/metadata/drift_report.json:/app/data/metadata/drift_report.json:ro
+      - ../models/model_metadata.json:/app/models/model_metadata.json:ro
     restart: unless-stopped
     networks:
       - mlops-network
@@ -81,8 +81,8 @@ services:
   # Servicio Frontend para interfaz de usuario
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile.frontend
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
     container_name: mlops-frontend
     ports:
       - "8080:8080"

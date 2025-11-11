@@ -48,23 +48,23 @@ def load_artifacts() -> None:
     
     try:
         # Cargar modelo
-        model_path = PROJECT_ROOT / 'best_model.pkl'
+        model_path = PROJECT_ROOT / 'models' / 'best_model.pkl'
         MODEL = joblib.load(model_path)
         logger.info(f"Modelo cargado desde: {model_path}")
         
         # Cargar preprocessor
-        preprocessor_path = PROJECT_ROOT / 'preprocessor.pkl'
+        preprocessor_path = PROJECT_ROOT / 'models' / 'preprocessor.pkl'
         PREPROCESSOR = joblib.load(preprocessor_path)
         logger.info(f"Preprocessor cargado desde: {preprocessor_path}")
         
         # Cargar metadatos del modelo
-        metadata_path = PROJECT_ROOT / 'model_metadata.json'
+        metadata_path = PROJECT_ROOT / 'models' / 'model_metadata.json'
         with open(metadata_path, 'r', encoding='utf-8') as f:
             MODEL_METADATA = json.load(f)
         logger.info("Metadatos del modelo cargados")
         
         # Cargar nombres de features
-        fe_metadata_path = PROJECT_ROOT / 'feature_engineering_metadata.json'
+        fe_metadata_path = PROJECT_ROOT / 'data' / 'metadata' / 'feature_engineering_metadata.json'
         with open(fe_metadata_path, 'r', encoding='utf-8') as f:
             fe_metadata = json.load(f)
             FEATURE_NAMES = fe_metadata.get('feature_names', [])

@@ -64,7 +64,7 @@ class DriftMonitor:
         Returns:
             DataFrame de referencia
         """
-        train_path = self.project_root / 'train_data.csv'
+        train_path = self.project_root / 'data' / 'processed' / 'train_data.csv'
         
         if not train_path.exists():
             raise FileNotFoundError(f"No se encontró {train_path}")
@@ -458,7 +458,7 @@ class DriftMonitor:
         ax4.set_title('Información del Análisis', fontweight='bold')
         
         plt.tight_layout()
-        plt.savefig(self.project_root / 'drift_summary.png', dpi=300, bbox_inches='tight')
+        plt.savefig(self.project_root / 'reports' / 'plots' / 'drift_summary.png', dpi=300, bbox_inches='tight')
         plt.show()
         
         logger.info("Visualización de drift generada")
@@ -471,7 +471,7 @@ class DriftMonitor:
             logger.warning("No hay resultados para guardar")
             return
         
-        report_path = self.project_root / 'drift_report.json'
+        report_path = self.project_root / 'data' / 'metadata' / 'drift_report.json'
         
         with open(report_path, 'w', encoding='utf-8') as f:
             json.dump(self.drift_results, f, indent=2, default=str)
@@ -500,7 +500,7 @@ def main() -> None:
     
     # 2. Simular datos actuales (usar test data como ejemplo)
     print("\n[2/5] Cargando datos actuales...")
-    current_data_path = project_root / 'test_data.csv'
+    current_data_path = project_root / 'data' / 'processed' / 'test_data.csv'
     current_data = pd.read_csv(current_data_path)
     print(f"✓ Datos actuales cargados: {current_data.shape}")
     

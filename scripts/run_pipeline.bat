@@ -13,7 +13,7 @@ echo ====================================================
 echo.
 
 REM Verificar que el entorno virtual existe
-if not exist "Proyecto-venv\Scripts\Activate.bat" (
+if not exist "..\Proyecto-venv\Scripts\Activate.bat" (
     echo [ERROR] Entorno virtual no encontrado.
     echo Por favor, ejecute set_up.bat primero.
     pause
@@ -22,8 +22,11 @@ if not exist "Proyecto-venv\Scripts\Activate.bat" (
 
 REM Activar entorno virtual
 echo [1/6] Activando entorno virtual...
-call venv\Scripts\activate.bat
+call ..\Proyecto-venv\Scripts\activate.bat
 echo.
+
+REM Cambiar al directorio raíz del proyecto
+cd ..
 
 REM Feature Engineering
 echo [2/6] Ejecutando Feature Engineering...
@@ -77,13 +80,26 @@ echo         PIPELINE EJECUTADO EXITOSAMENTE
 echo ====================================================
 echo.
 echo Archivos generados:
-echo   - data_cleaned.csv
-echo   - train_data.csv y test_data.csv
-echo   - preprocessor.pkl
-echo   - best_model.pkl
-echo   - model_metadata.json
-echo   - drift_report.json
-echo   - Graficos: model_comparison.png, confusion_matrices.png, roc_curves.png
+echo   DATOS:
+echo   - data/processed/data_cleaned.csv
+echo   - data/processed/train_data.csv
+echo   - data/processed/test_data.csv
+echo.
+echo   MODELOS:
+echo   - models/preprocessor.pkl
+echo   - models/best_model.pkl
+echo   - models/model_metadata.json
+echo.
+echo   METADATOS:
+echo   - data/metadata/eda_metadata.json
+echo   - data/metadata/feature_engineering_metadata.json
+echo   - data/metadata/drift_report.json
+echo.
+echo   GRAFICOS:
+echo   - reports/plots/model_comparison.png
+echo   - reports/plots/confusion_matrices.png
+echo   - reports/plots/roc_curves.png
+echo   - reports/plots/drift_summary.png
 echo.
 echo ====================================================
 echo.

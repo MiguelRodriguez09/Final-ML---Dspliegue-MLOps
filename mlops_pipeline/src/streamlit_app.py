@@ -77,7 +77,7 @@ st.markdown("""
 
 def load_drift_report():
     """Carga el reporte de drift más reciente."""
-    report_path = project_root / 'drift_report.json'
+    report_path = project_root / 'data' / 'metadata' / 'drift_report.json'
     
     # Debug: Mostrar la ruta que se está buscando
     print(f"DEBUG: Buscando drift_report.json en: {report_path}")
@@ -99,7 +99,7 @@ def load_drift_report():
 
 def load_model_metadata():
     """Carga los metadatos del modelo."""
-    metadata_path = project_root / 'model_metadata.json'
+    metadata_path = project_root / 'models' / 'model_metadata.json'
     
     # Debug: Mostrar la ruta que se está buscando
     print(f"DEBUG: Buscando model_metadata.json en: {metadata_path}")

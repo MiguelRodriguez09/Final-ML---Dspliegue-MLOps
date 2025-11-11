@@ -51,10 +51,15 @@ WORKDIR /app
 COPY --chown=mlops:mlops mlops_pipeline/ mlops_pipeline/
 COPY --chown=mlops:mlops requirements.txt .
 
+# Crear estructura de directorios
+RUN mkdir -p models data/processed data/metadata
+
 # Copiar artefactos del modelo (copiado durante el build, si faltan usar volúmenes)
-COPY --chown=mlops:mlops best_model.pkl preprocessor.pkl ./ 
-COPY --chown=mlops:mlops model_metadata.json feature_engineering_metadata.json eda_metadata.json ./
-COPY --chown=mlops:mlops train_data.csv test_data.csv ./
+COPY --chown=mlops:mlops models/best_model.pkl models/preprocessor.pkl models/
+COPY --chown=mlops:mlops models/model_metadata.json models/
+COPY --chown=mlops:mlops data/metadata/feature_engineering_metadata.json data/metadata/
+COPY --chown=mlops:mlops data/metadata/eda_metadata.json data/metadata/
+COPY --chown=mlops:mlops data/processed/train_data.csv data/processed/test_data.csv data/processed/
 
 # Exponer puertos
 EXPOSE 5000 8501

@@ -82,8 +82,8 @@ class ModelTrainer:
         Returns:
             Tupla (train_data, test_data)
         """
-        train_path = self.project_root / 'train_data.csv'
-        test_path = self.project_root / 'test_data.csv'
+        train_path = self.project_root / 'data' / 'processed' / 'train_data.csv'
+        test_path = self.project_root / 'data' / 'processed' / 'test_data.csv'
         
         if not train_path.exists() or not test_path.exists():
             raise FileNotFoundError("Datos procesados no encontrados. Ejecutar ft_engineering.py primero.")
@@ -351,7 +351,7 @@ class ModelTrainer:
         ax4.grid(axis='y', alpha=0.3)
         
         plt.tight_layout()
-        plt.savefig(self.project_root / 'model_comparison.png', dpi=300, bbox_inches='tight')
+        plt.savefig(self.project_root / 'reports' / 'plots' / 'model_comparison.png', dpi=300, bbox_inches='tight')
         plt.show()
         
         logger.info("Gráficos de comparación generados")
@@ -385,7 +385,7 @@ class ModelTrainer:
             axes[idx].set_ylabel('Actual')
         
         plt.tight_layout()
-        plt.savefig(self.project_root / 'confusion_matrices.png', dpi=300, bbox_inches='tight')
+        plt.savefig(self.project_root / 'reports' / 'plots' / 'confusion_matrices.png', dpi=300, bbox_inches='tight')
         plt.show()
         
         logger.info("Matrices de confusión generadas")
@@ -422,7 +422,7 @@ class ModelTrainer:
         plt.legend(loc='lower right')
         plt.grid(alpha=0.3)
         
-        plt.savefig(self.project_root / 'roc_curves.png', dpi=300, bbox_inches='tight')
+        plt.savefig(self.project_root / 'reports' / 'plots' / 'roc_curves.png', dpi=300, bbox_inches='tight')
         plt.show()
         
         logger.info("Curvas ROC generadas")
@@ -461,7 +461,7 @@ class ModelTrainer:
             raise ValueError("No hay modelo seleccionado. Ejecutar select_best_model() primero.")
         
         # Guardar modelo
-        model_path = self.project_root / 'best_model.pkl'
+        model_path = self.project_root / 'models' / 'best_model.pkl'
         joblib.dump(self.best_model, model_path)
         logger.info(f"Modelo guardado en: {model_path}")
         
@@ -473,7 +473,7 @@ class ModelTrainer:
             'all_results': self.results
         }
         
-        metadata_path = self.project_root / 'model_metadata.json'
+        metadata_path = self.project_root / 'models' / 'model_metadata.json'
         with open(metadata_path, 'w', encoding='utf-8') as f:
             json.dump(metadata, f, indent=2)
         logger.info(f"Metadatos guardados en: {metadata_path}")

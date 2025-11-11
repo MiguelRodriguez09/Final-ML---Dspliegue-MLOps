@@ -21,10 +21,13 @@ if errorlevel 1 (
 )
 echo [OK] Docker instalado
 
+REM Cambiar al directorio raíz del proyecto
+cd /d "%~dp0.."
+
 echo.
 echo [2/5] Verificando artefactos del modelo...
-if not exist "best_model.pkl" (
-    echo [WARNING] best_model.pkl no encontrado
+if not exist "models\best_model.pkl" (
+    echo [WARNING] best_model.pkl no encontrado en models\
     echo [INFO] Generando artefactos del modelo...
     python mlops_pipeline\src\model_training_evaluation.py
     if errorlevel 1 (
@@ -37,7 +40,7 @@ echo [OK] Artefactos disponibles
 
 echo.
 echo [3/5] Construyendo imagenes Docker...
-docker-compose build
+docker-compose -f docker\docker-compose.yml build
 if errorlevel 1 (
     echo [ERROR] Error al construir imagenes
     pause
@@ -47,7 +50,7 @@ echo [OK] Imagenes construidas
 
 echo.
 echo [4/5] Iniciando servicios...
-docker-compose up -d
+docker-compose -f docker\docker-compose.yml up -d
 if errorlevel 1 (
     echo [ERROR] Error al iniciar servicios
     pause
@@ -58,7 +61,7 @@ echo [OK] Servicios iniciados
 echo.
 echo [5/5] Verificando servicios...
 timeout /t 10 /nobreak >nul
-docker-compose ps
+docker-compose -f docker\docker-compose.yml ps
 
 echo.
 echo ============================================
@@ -70,10 +73,11 @@ echo   - API:       http://localhost:5000
 echo   - Dashboard: http://localhost:8501
 echo.
 echo Comandos utiles:
-echo   - Ver logs:        docker-compose logs -f
-echo   - Detener:         docker-compose down
-echo   - Estado:          docker-compose ps
-echo   - Reiniciar:       docker-compose restart
+echo   - Ver logs:        docker-compose -f docker\docker-compose.yml logs -f
+echo   - Detener:         docker-compose -f docker\docker-compose.yml down
+echo   - Estado:          docker-compose -f docker\docker-compose.yml ps
+echo   - Reiniciar:       docker-compose -f docker\docker-compose.yml restart
+echo   - O usa Make:      make up / make down / make logs
 echo.
 echo Para mas informacion, consulta:
 echo   - DOCKER_README.md (inicio rapido)

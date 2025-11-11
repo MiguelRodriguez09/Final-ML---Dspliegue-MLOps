@@ -32,8 +32,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar código de la aplicación
 COPY --chown=streamlit:streamlit mlops_pipeline/ mlops_pipeline/
-COPY --chown=streamlit:streamlit drift_report.json model_metadata.json ./
-COPY --chown=streamlit:streamlit train_data.csv test_data.csv ./
+
+# Crear estructura de directorios
+RUN mkdir -p models data/processed data/metadata
+
+# Copiar archivos necesarios
+COPY --chown=streamlit:streamlit data/metadata/drift_report.json data/metadata/
+COPY --chown=streamlit:streamlit models/model_metadata.json models/
+COPY --chown=streamlit:streamlit data/processed/train_data.csv data/processed/test_data.csv data/processed/
 
 # Exponer puerto de Streamlit
 EXPOSE 8501

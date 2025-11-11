@@ -21,7 +21,7 @@ echo [OK] Python encontrado
 echo.
 
 REM Navigate to frontend directory
-cd /d "%~dp0frontend"
+cd /d "%~dp0..\frontend"
 
 echo [INFO] Directorio actual: %CD%
 echo [INFO] Iniciando servidor en http://localhost:8080
